@@ -1,0 +1,46 @@
+---
+---
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>js2coffee [m]</title>
+    <link rel='stylesheet' href='assets/vendor.css'>
+    <link rel='stylesheet' href='assets/style.css'>
+    <script src="//rawgit.com/js2coffee/js2coffee/master/dist/js2coffee.js"></script>
+    <script src='//cdn.rawgit.com/jashkenas/coffeescript/1.9.0/extras/coffee-script.js'></script>
+    <script src='assets/vendor.js'></script>
+    <script src='assets/app.js'></script>
+</head>
+<body>
+  {% include mobile-view.html %}
+
+  <div class='code-area'>
+    <div class='code-box left'>
+      <h3><strong>JavaScript</strong> <em>Type here</em></h3>
+    </div>
+    <div class='code-box right'>
+      <h3><strong>CoffeeScript</strong> <em>output</em></h3>
+    </div>
+    <div class='code-box-popup hide'>
+      <div class='container'>
+        <button class='close-button'></button>
+        <h3><strong>JavaScript Preview</strong> <em>via CoffeeScript</em></h3>
+      </div>
+    </div>
+    <div class='code-toolbar'>
+      <button class='button link' role='link'>Link</button>
+      <button class='button run' role='run'>Run</button>
+    </div>
+    <div class='announcement-box'>
+      <button class='announcement-banner'>
+        <i class='icon'></i>
+        <strong class='title'>Using the 'master' branch</strong>
+      </button>
+    </div>
+  </div>
+
+  {% include sidebar.html %}
+  {% include analytics.html %}
+</body>
+</html>

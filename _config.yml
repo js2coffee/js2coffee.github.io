@@ -1,0 +1,11 @@
+sass_dir: _sass
+exclude:
+  - Makefile
+  - README.md
+  - NOTES.md
+  - _/Gemfile
+  - _/Gemfile.lock
+  - CNAME
+  - .gitignore
+  - node_modules
+  - package.json

@@ -1,0 +1,78 @@
+---
+---
+<!doctype html>
+{% assign timestamp = site.time | date: "%Y%m%d%H%M%S" %}
+<html>
+<head>
+  <meta charset="UTF-8">
+
+  <title>js2coffee 2.0 &mdash; convert JavaScript to CoffeeScript</title>
+  <meta property='og:title'  content='js2coffee - convert JavaScript to CoffeeScript'>
+  <meta name='twitter:title' content='js2coffee - convert JavaScript to CoffeeScript'>
+
+  <!-- url -->
+  <meta property='og:url'  content='http://js2.coffee/'>
+  <meta name='twitter:url' content='http://js2.coffee/'>
+  <link rel='canonical'       href='http://js2.coffee/'>
+
+  <!-- desc -->
+  <meta name='description'         content='A JS to CoffeeScript trans-compiler'>
+  <meta property='og:description'  content='A JS to CoffeeScript trans-compiler'>
+  <meta name='twitter:description' content='A JS to CoffeeScript trans-compiler'>
+
+  <!-- image -->
+  <meta property="og:image"  content="http://js2.coffee/assets/preview.png">
+  <meta name="twitter:image" content="http://js2.coffee/assets/preview.png">
+
+  <!-- ua -->
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  <!-- viewport -->
+  <meta name='viewport' content='width=device-width'>
+
+  <!-- favicon -->
+  <link rel="icon" type="image/png" href="/assets/favicon-32.png">
+
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+
+  {% include polyfills.html %}
+
+  <!-- css -->
+  <link rel='stylesheet' href='assets/vendor.css?t={{ timestamp }}'>
+  <link rel='stylesheet' href='assets/style.css?t={{ timestamp }}'>
+
+  <!-- js -->
+  <script src="{{ site.data.js.js2coffee.url | replace: '%s', site.data.js.js2coffee.version }}"></script>
+  <script src="{{ site.data.js.coffeescript.url | replace: '%s', site.data.js.coffeescript.version }}"></script>
+  <script src='assets/vendor.js?t={{ timestamp }}'></script>
+  <script src='assets/app.js?t={{ timestamp }}'></script>
+</head>
+<body>
+  {% include mobile-view.html %}
+
+  <div class='code-area'>
+    <div class='code-box left'>
+      <h3><strong>JavaScript</strong> <em>Type here</em></h3>
+    </div>
+    <div class='code-box right'>
+      <h3><strong>CoffeeScript</strong> <em>output</em></h3>
+    </div>
+    <div class='code-box-popup hide'>
+      <div class='container'>
+        <button class='close-button'></button>
+        <h3><strong>JavaScript Preview</strong> <em>via CoffeeScript</em></h3>
+      </div>
+    </div>
+    <div class='code-toolbar'>
+      <button class='button link' role='link'>Link</button>
+      <button class='button run' role='run'>Run</button>
+    </div>
+    <div class='announcement-box'>
+      {% include announcements.html %}
+    </div>
+  </div>
+
+  {% include sidebar.html %}
+  {% include analytics.html %}
+</body>
+</html>

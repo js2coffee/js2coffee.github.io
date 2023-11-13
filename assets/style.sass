@@ -1,0 +1,948 @@
+---
+---
+
+@import url('//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700')
+@import 'ionicons'
+
++ion-font()
+
+/*
+ * vars
+ */
+
+$bg: lighten(#20242a, 2%)
+$sidebar-bg: lighten($bg, 1%)
+$text: #ddd
+$litetext: mix($text, $bg, 35%)
+$monospace: menlo, monospace
+$sans: 'source sans pro', sans-serif
+$red: #C0392B
+$yellow: #F1C40F
+$accent: #2ECC71
+$accent2: lighten(#E74C3C, 10%)
+
+$sidebar-width: 200px
+
+/*
+ * base
+ */
+
+*
+  box-sizing: border-box
+
+= antialias
+  text-rendering: optimizeLegibility
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+html
+  background: $bg
+
+html, input, textarea, td, button
+  font-family: $sans
+  line-height: 1.5
+  font-size: 1em
+
+html, body
+  margin: 0
+  padding: 0
+  height: 100%
+  overflow: hidden
+
+body
+  font-size: 14px
+  color: $text
+
+button
+  cursor: pointer
+  margin: 0
+  padding: 0
+  border: 0
+  background: transparent
+  display: inline-block
+
+button:active,
+button:focus
+  outline: 0
+
+a, a:visited
+  color: #f0f0f0
+  text-decoration: none
+
+a:hover, a:focus
+  color: white
+
+/*
+ * mixins
+ */
+
+= black-box
+  background: darken($bg, 5%)
+  box-shadow: 0 0 4px rgba(black, 0.1)
+  border-radius: 3px
+  border: solid 1px $accent2
+  border: solid 1px mix($accent2, $bg, 50%)
+
+/*
+ * main area
+ */
+
+.code-area
+  &
+    bottom: 0
+    position: absolute
+    top: 0
+    left: 0
+    right: $sidebar-width
+
+  .code-toolbar
+    position: absolute
+    right: 15px
+    bottom: -10px
+    padding: 15px
+    padding-right: 0
+    width: 200px
+    z-index: 10
+
+/*
+ * heh
+ */
+
+.main-sidebar
+  +antialias()
+  background: $sidebar-bg
+  box-shadow: 0 0 4px rgba(black, 0.1)
+  width: $sidebar-width
+  height: 100%
+  position: absolute
+  top: 0
+  right: 0
+  padding: 15px
+
+  .bottom
+    position: absolute
+    bottom: 0
+    padding: 15px
+    width: 100%
+    padding-bottom: 0
+    left: 0
+    background: $sidebar-bg
+
+  h1, h5
+    margin: 0
+    padding: 0
+
+  h1
+    font-weight: 300
+    margin: 0
+    font-size: 1.5em
+    text-align: center
+    border: solid 2px lighten($bg, 5%)
+    padding: 30px 10px
+    border-radius: 3px
+    margin-bottom: 15px
+    line-height: 1.2em
+
+  h5
+    font-weight: 400
+    font-size: 0.9em
+    color: #888
+
+  .section
+    margin: 15px 0
+
+/*
+ * logo
+ */
+
+.js2c-logo
+  display: block
+  margin-top: 4px
+  height: 40px
+  background: url('./logo.svg') center center / 85% auto no-repeat
+
+/*
+ * links list
+ */
+
+.links-list
+  &, li
+    margin: 0
+    padding: 0
+    list-style: none
+
+  &
+    margin: 15px 0
+
+  a
+    display: block
+    padding: 5px 15px
+    margin-left: -15px
+    margin-right: -15px
+    color: mix($text, $bg, 50%)
+    border-radius: 3px
+    font-size: 0.9em
+    transition: all 100ms linear
+
+  li
+    border-top: solid 1px rgba(white, 0.02)
+
+  &
+    border-bottom: solid 1px rgba(white, 0.02)
+
+  a:hover, a:focus
+    background: rgba($accent2, 0.03)
+    color: white
+    &:after
+      opacity: 1
+
+  a:active
+    background: rgba($accent2, 0.1)
+    color: white
+    &:after
+      opacity: 1
+
+  a:after
+    float: right
+    font-size: 14px
+    margin: 2px 5px 0 0
+    color: $accent2
+
+  a.github:after
+    +ion-icon('social-github')
+
+  a.coffeescript:after
+    +ion-icon('coffee', 16px)
+
+  a.issues:after
+    +ion-icon('log-out')
+
+/*
+ * each code box
+ */
+
+.code-box
+  $size: 2px
+  $shadow: inset -1px 0 0 rgba(black, 0.1), inset -2px 0 1px rgba(black, 0.05)
+
+  &
+    width: 50%
+    height: 100%
+    position: relative
+    float: left
+    box-shadow: inset 0 0 0 black, $shadow
+    transition: all 100ms linear
+
+  &.left.focus
+    box-shadow: inset 0 3px 0 $accent, $shadow
+
+  &.right.focus
+    box-shadow: inset 0 3px 0 $accent2, $shadow
+
+  &.focus h3 strong
+    color: white
+
+  &.focus.left h3
+    border-bottom: solid 1px mix($accent, $bg, 10%)
+
+  &.focus.right h3
+    border-bottom: solid 1px mix($accent2, $bg, 10%)
+
+/*
+ * common
+ */
+.code-box, .code-box-popup
+  &:not(.focus) .CodeMirror
+    opacity: 0.75
+
+  h3
+    +antialias()
+    position: absolute
+    top: 0
+    left: 30px
+    right: 30px
+    padding: 10px 0
+    font-size: 0.8em
+    border-bottom: solid 1px lighten($bg, 3%)
+
+    strong
+      color: mix(white, $bg, 50%)
+      font-weight: 300
+      text-transform: uppercase
+      letter-spacing: 2px
+
+    em
+      font-style: normal
+      font-weight: 400
+      color: mix(white, $bg, 20%)
+      margin-left: 10px
+
+  .CodeMirror
+    position: absolute
+    top: 0
+    left: 0
+    height: 100%
+    width: 100%
+
+    padding: 30px
+    padding-top: 70px
+    padding-left: 10px
+
+  &.error .CodeMirror
+    opacity: 0.2
+
+
+/*
+ * popup
+ */
+
+.code-box-popup
+  &
+    position: absolute
+    left: 0
+    top: 0
+    width: 50%
+    height: 100%
+    padding: 10px
+    transition: transform 250ms ease, opacity 250ms ease
+    transform: scale(1) translate(0, 0)
+    opacity: 1
+    z-index: 10
+
+  &, .CodeMirror, pre
+    cursor: default
+
+  &.hide
+    transform: scale(0.98) translate(10px, 0)
+    pointer-events: none
+    opacity: 0
+
+  &:not(.focus):not(.error) .CodeMirror
+    opacity: 0.9
+
+  .container
+    position: absolute
+    top: 15px
+    left: 15px
+    bottom: 15px
+    right: 15px
+    z-index: 5
+    +black-box
+
+  h3
+    border-bottom: 0
+
+  h3 strong
+    color: $accent2
+
+  h3 em
+    color: mix($accent2, $bg, 50%)
+
+  .CodeMirror
+    padding-left: 30px
+    padding-top: 55px
+
+/*
+ * close
+ */
+
+.close-button
+  position: absolute
+  top: 0
+  right: 0
+  width: 64px
+  height: 100%
+  background: transparent
+  border: 0
+  padding: 0
+  margin: 0
+  z-index: 10
+  cursor: pointer
+  color: mix($accent2, $bg, 50%)
+  transition: color 100ms linear
+
+  &:hover
+    color: $accent2
+
+  &:before
+    +ion-icon('ios-close-outline', 32px)
+    position: absolute
+    top: 0
+    left: 0
+    width: 64px
+    height: 64px
+    line-height: 64px
+    text-align: center
+    vertical-align: top
+
+  &:hover:before
+    @extend %ion-icon-ios-close
+
+
+/*
+ * codemirror customization
+ */
+
+.CodeMirror
+  &
+    cursor: text
+    transition: opacity 100ms linear
+    font-size: 13px
+
+  &.CodeMirror.CodeMirror
+    font-family: $monospace
+    background: transparent
+    box-shadow: none
+
+  .CodeMirror-gutters.CodeMirror-gutters
+    background: transparent
+    border-right: 0
+    box-shadow: none
+
+  .CodeMirror-lint-marker-warning,
+  .CodeMirror-lint-marker-error,
+  .CodeMirror-lint-marker-multiple
+    opacity: 1
+
+  .CodeMirror-lint-marker-error
+    background: transparent
+    &:before
+      +ion-icon('android-cancel', 12px, $top: -2px)
+      color: $red
+
+  .CodeMirror-lint-marker-warning
+    background: transparent
+    &:before
+      +ion-icon('android-warning', 12px, $top: -1px)
+      color: $yellow
+
+  .CodeMirror-lint-marker-multiple
+    opacity: 0
+
+.CodeMirror-lint-tooltip.CodeMirror-lint-tooltip
+  font-family: $sans
+  padding: 8px 15px
+  background: #111
+  color: white
+  border: 0
+
+  .CodeMirror-lint-message-error,
+  .CodeMirror-lint-message-warning
+    padding-left: 0
+    background: none
+
+  .CodeMirror-lint-message-error:before
+    +ion-icon('android-close', 20px, $top: -1px)
+    color: $red
+    margin-right: 12px
+  .CodeMirror-lint-message-warning:before
+    +ion-icon('alert', 16px, $top: -1px)
+    color: $yellow
+    margin-right: 12px
+
+.CodeMirror-overlayscroll-vertical,
+.CodeMirror-overlayscroll-horizontal
+  div
+    opacity: 0
+    transition: opacity 100ms linear
+    background: lighten($bg, 10%)
+
+.CodeMirror-focused, .CodeMirror:hover
+  .CodeMirror-overlayscroll-vertical,
+  .CodeMirror-overlayscroll-horizontal
+    div
+      opacity: 0.5
+
+.CodeMirror-overlayscroll
+  .CodeMirror-scrollbar-filler
+    background: transparent
+
+/*
+ * Yep
+ */
+
+.code-toolbar
+  $height: 30px
+
+  &
+    +antialias()
+    text-align: right
+
+  .button
+    margin-bottom: 10px
+    margin-left: 8px
+    display: inline-block
+    width: 80px
+    background: $bg
+    box-shadow: 0 0 0 4px $bg
+    border: solid 1px rgba(white, 0.1)
+    color: lighten($bg, 50%)
+    border-radius: 4px
+    height: $height
+    line-height: $height - 4px
+    font-size: 0.9em
+    transition: all 100ms linear
+
+  .button:hover
+    border-color: transparent
+    background: lighten($bg, 15%)
+    color: white
+
+  .button:active
+    background: $accent
+    color: white
+    transition: all 0 linear
+
+    &:before
+      color: white
+
+  .button:before
+    margin-right: 8px
+    color: $accent
+    font-size: 14px
+    position: relative
+    top: -1px
+
+  .button.run:before
+    +ion-icon('play')
+
+  .button.link:before
+    +ion-icon('link')
+
+/*
+ *
+ */
+
+.section
+  &
+    color: $litetext
+
+  &:not(:first-child):not(.first)
+    border-top: solid 1px rgba($accent, 0.05)
+    padding-top: 15px
+
+  h3
+    margin: 0
+    padding: 0
+    text-transform: uppercase
+    font-size: 0.8em
+    font-weight: normal
+    line-height: 1.3
+    letter-spacing: 1px
+
+    margin-bottom: 15px
+
+/*
+ * link
+ */
+
+.code-example
+  &
+    display: block
+    background: lighten($bg, 5%)
+    border-bottom: solid 1px rgba(black, 0.2)
+    padding: 5px 10px
+    color: $text
+    border-radius: 3px
+    text-align: center
+    font-size: 0.9em
+    // border: solid 2px lighten($bg, 5%)
+    // padding: 5px
+    margin: 10px 0 0 0
+
+  &:hover,
+  &:focus
+    background: lighten($bg, 10%)
+
+  &:active
+    background: lighten($bg, 15%)
+
+/*
+ *
+ */
+
+.checkbox-row
+  &
+    transition: all 100ms linear
+    cursor: pointer
+    display: block
+
+  & + &
+    margin-top: 5px
+
+  &:hover
+    color: $text
+
+  span
+    text-transform: uppercase
+    letter-spacing: 1px
+    font-size: 0.9em
+    font-weight: normal
+
+/*
+ *
+ */
+
+.section.section.ad-section
+  &:last-child
+    margin-bottom: 0
+
+  &
+    font-size: 0.9em
+    line-height: 1.4
+    border-top: 0
+    margin: 0 -15px 15px -15px
+    padding: 15px
+    padding-top: 0
+    min-height: 200px
+
+  a
+    display: block
+    margin: 0
+    padding: 0
+    color: $litetext
+    transition: color 100ms linear
+    cursor: pointer
+    &:hover
+      color: $text
+
+  .carbon-img
+    text-align: left
+    background-color: rgba(black, 0.1)
+    box-shadow: inset 1px 1px 1px rgba(black, 0.1)
+    border-radius: 4px
+    padding: 20px
+    transition: background-color 100ms linear
+
+    img
+      box-shadow: 0 2px 3px rgba(black, 0.4)
+      border-radius: 2px
+      background: $bg
+      height: 100px
+      width: 130px
+
+    &:hover
+      background-color: rgba(mix($accent, black, 20%), 0.1)
+      box-shadow: inset 1px 1px 1px rgba(black, 0.2)
+
+  .carbon-text
+    margin-top: 10px
+    color: mix($text, $litetext, 50%)
+
+  .carbon-poweredby
+    color: $litetext
+
+  img
+    display: block
+    width: 130px
+    height: 100px
+
+.section.share-section:last-child
+  border-top: 0
+  padding-top: 0
+  padding-bottom: 0
+  margin-bottom: 10px
+
+/*
+ * announcement
+ */
+
+.announcement-box
+  &
+    +antialias()
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 50%
+    padding-right: 15px
+    transition: all 250ms ease
+
+  &.expanded
+    transform: translate(0, 50px)
+
+  .announcement-dialog
+    margin: 15px 15px 5px 30px
+    opacity: 0
+    pointer-events: none
+    display: none
+    transition: opacity 250ms ease
+
+  .announcement-dialog.visible
+    display: block
+    opacity: 1
+    pointer-events: auto
+
+/*
+ * the button
+ */
+
+.announcement-banner
+  &
+    width: 100%
+    display: block
+    cursor: pointer
+    text-align: left
+
+  &
+    position: relative
+    z-index: 5
+    background-color: $bg
+    background: linear-gradient(to bottom, rgba($bg, 0.5), $bg 10%)
+    padding: 15px 30px
+    color: $litetext
+
+    white-space: nowrap
+
+  &, .title, .expando
+    transition: all 100ms linear
+
+  .icon
+    display: inline-block
+    vertical-align: middle
+    width: 32px
+    height: 32px
+    line-height: 32px - 8px
+    text-align: center
+    border: solid 2px rgba(white, 0.1)
+    border-radius: 50%
+    margin-right: 15px
+
+    color: $accent2
+    background: transparent
+
+  .icon:before
+    @include ion-icon('android-arrow-up')
+    font-size: 20px
+
+  .title
+    color: mix($text, $bg, 50%)
+    font-weight: normal
+    margin-right: 15px
+
+  .title:before
+    @include ion-icon('ios-chatboxes-outline')
+    font-size: 16px
+    margin-right: 10px
+
+  .date
+    margin-right: 15px
+    font-size: 0.8em
+    text-transform: uppercase
+    letter-spacing: 1px
+
+  .expando
+    display: inline-block
+    opacity: 0
+    width: 30px
+    height: 20px
+    line-height: 20px - 4px
+    border: solid 1px rgba(white, 0.1)
+    border-radius: 3px
+    color: $litetext
+    text-align: center
+
+  .expando:before
+    content: '•••'
+
+  &:hover, &:focus
+    &
+      color: $litetext
+
+    .icon
+      border-color: $accent2
+
+    .title
+      color: $text
+
+    .expando
+      color: $accent2
+      border-color: $accent2
+
+/*
+ *
+ */
+
+.announcement-dialog
+  position: relative
+  +black-box
+  padding: 0 15px
+  padding-right: 64px
+  height: 50%
+  color: $litetext
+  line-height: 1.5
+
+  p, h2, h3
+    margin: 15px 0
+
+  .heading
+    color: $text
+    font-weight: normal
+    margin-bottom: 10px
+    padding: 0
+    font-size: 1.3em
+    border-bottom: solid 1px rgba(white, 0.1)
+    padding-bottom: 10px
+
+  .heading + p
+    margin-top: 0
+
+  .heading:before
+    +ion-icon('ios-chatboxes-outline')
+    font-size: 16px
+    margin-right: 10px
+
+  .title
+    font-weight: normal
+
+  .date
+    font-size: 0.6em
+    color: $litetext
+    text-transform: uppercase
+    letter-spacing: 1px
+    margin-left: 10px
+
+  a, a:visited
+    color: mix($litetext, $text, 25%)
+
+  a:after
+    +ion-icon('ios-redo')
+    font-size: 12px
+    opacity: 0.5
+    color: $accent
+    margin: 0 6px 0 4px
+
+  a:hover, a:focus
+    color: $text
+
+/*
+ * Mobile view:
+ * `.mobile-view` - info message for mobile visitors.
+ */
+
+.mobile-view
+  &
+    display: none
+
+  &
+    max-width: 350px
+    margin: auto
+    padding: 15px
+    text-align: center
+    color: $litetext
+
+  .js2c-logo,
+  .code-example
+    max-width: 250px
+    margin-left: auto
+    margin-right: auto
+
+  p
+    margin: 30px 0 15px 0
+
+  b
+    color: mix($text, $litetext, 50%)
+    border-bottom: solid 1px rgba(white, 0.2)
+
+  iframe
+    position: relative
+    left: 20px
+
+@media (max-width: 768px)
+  html, body
+    height: 100%
+
+  body
+    display: -webkit-box
+    display: -webkit-flex
+    display: -ms-flexbox
+    display: flex
+
+  .mobile-view
+    display: block
+
+  .code-area, .main-sidebar
+    display: none
+
+/*
+ * Faux addressbar:
+ * `.faux-addressbar` - used to display the site address in the mobile view.
+ */
+
+.faux-addressbar
+  &
+    margin: 20px auto
+    border: solid 1px rgba(white, 0.1)
+    border-radius: 4px
+    padding: 10px 15px
+    text-align: left
+    font-size: 0.8em
+    display: block
+    max-width: 250px
+
+    font-family: $monospace
+
+  &, &:visited
+    color: $text
+
+  &:before
+    +ion-icon('android-globe')
+    font-size: 16px
+    margin-right: 5px
+    opacity: 0.3
+
+    position: relative
+    top: -1px
+    color: $accent2
+
+/*
+ * Share buttons:
+ * `.share-buttons` - where github/tweet buttons are
+ */
+
+.share-buttons
+  > *
+    vertical-align: top
+    margin-right: 10px
+
+/*
+ * Share button:
+ * `.share-button` - a tweet button.
+ *
+ *     a.share-button.twitter
+ *       | Tweet
+ */
+
+.share-button
+  &
+    display: inline-block
+    height: 30px
+    line-height: 30px
+    padding: 0 10px
+    background: darken($bg, 7%)
+    border-radius: 4px
+    color: $litetext
+    transition: all 100ms linear
+    font-size: 0.9em
+    font-weight: bold
+    font-family: sans-serif
+    +antialias()
+
+  &.twitter:after
+    display: none
+    content: none
+
+  &:before
+    margin-right: 9px
+    position: relative
+    top: -1px
+    font-size: 16px
+
+  &.twitter:before
+    +ion-icon('social-twitter-outline')
+    color: dodgerblue
+
+  &.twitter:focus,
+  &.twitter:hover
+    background: dodgerblue
+    &, &:before
+      color: white
